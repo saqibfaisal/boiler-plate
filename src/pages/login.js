@@ -9,22 +9,23 @@ function Login() {
   const [password, setPassword] = useState("");
   // const [isLoading,setLoader]= useState(false)
   let Navigate = useNavigate();
-  let login = () => {
+  let login = (e) => {
+    e.preventDefault();
     // setLoader(true)
     LoginUser({ email, password })
-    .then((success) => {
-      // setLoader(false)
-        alert(success);
-        Navigate('/profile', {
-
-          state: success
-
-      })
+      .then((success) => {
+        // setLoader(false)
+        console.log(success);
+        alert("Login Success");
+        Navigate("/profile", {
+          state: success,
+        });
         // Navigate(`/profile${success}`)
-    }).catch((err)=>{
-      // setLoader(false)
-      console.log(err);
-    })
+      })
+      .catch((err) => {
+        // setLoader(false)
+        console.log(err);
+      });
   };
   let Signup = () => {
     Navigate("/signup");
@@ -32,7 +33,14 @@ function Login() {
   return (
     <div class="login-box">
       <h2>Login</h2>
-      <form>
+      <form
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <div class="user-box">
           <input
             type="text"
@@ -51,7 +59,7 @@ function Login() {
           />
           <label>Password</label>
         </div>
-        <a href="#" onClick={login}>
+        <a onClick={login}>
           <span></span>
           <span></span>
           <span></span>

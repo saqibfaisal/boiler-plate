@@ -1,17 +1,17 @@
 import {
   Avatar,
-  Button,
+  // Button,
   InputLabel,
   MenuItem,
   Select,
-  TextField,
+  // TextField,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {signUpUser} from "../config/firebasemethod"
-import CircularProgress from '@mui/material/CircularProgress';
+// import CircularProgress from '@mui/material/CircularProgress';
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,16 +24,16 @@ function SignUp() {
   };
   let Navigate = useNavigate();
   let signup = () => {
-    setLoader(true)
+    // setLoader(true)
     signUpUser({email,password,username,avatar})
     // console.log({email,password,username,avatar});
     .then((success)=>{
-      setLoader(false)
+      // setLoader(false)
       alert (success)
       Navigate("/Login");
     })
     .catch((err)=>{
-      setLoader(false)
+      // setLoader(false)
       console.log(err)
     })
   };
@@ -41,64 +41,48 @@ function SignUp() {
     Navigate("/Login");
   };
   return (
-    <div className="signup">
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <Box
-          sx={{
-            border: "2.5px solid white",
-            borderRadius: "15px",
-            color: "black",
-            p: 3,
-            width: "55vh",
-          }}
-        >
-          <Typography
-            variant="h5"
-            color="white"
-            align="center"
-            fontWeight="600"
-          >
-            SignUp
-          </Typography>
-          <Box p={3}>
-            <Box p={1.5}>
-              <TextField
-                fullWidth
-                label="UserName"
-                variant="standard"
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </Box>
-            <Box p={1.5}>
-              <TextField
-                required
-                fullWidth
-                label="Email"
-                variant="standard"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Box>
-            <Box p={1.5}>
-              <TextField
-                required
-                fullWidth
-                label="Password"
-                variant="standard"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Box>
-            <Box sx={{ p: 2 }}>
-              <InputLabel id="demo-simple-select-label">
-                Select Avatar
-              </InputLabel>
-              <Select
+    <div class="login-box">
+    <h2>SignUp</h2>
+    <form
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div class="user-box">
+        <input
+          type="text"
+          name=""
+          required=""
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <label>UserName</label>
+      </div>
+      <div class="user-box">
+        <input
+          type="text"
+          name=""
+          required=""
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <label>Email</label>
+      </div>
+      <div class="user-box">
+        <input
+          type="password"
+          name=""
+          required=""
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <label>Password</label>
+      </div>
+      <div class="user-box">
+      <InputLabel id="demo-simple-select-label">
+               Select Avatar
+             </InputLabel>
+             <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={avatar}
@@ -188,30 +172,30 @@ function SignUp() {
                   />
                 </MenuItem>
               </Select>
-            </Box>
-            <Box align="center" mt={2}>
-              <Button variant="contained" onClick={signup}>
-                {isLoading?<CircularProgress />:"SingUp"}
-                
-              </Button>
-            </Box>
-            <Box align="center" mt={2}>
-              <Typography variant="span" color="white">
-                Already Have an Account ?
-              </Typography>
-              <Typography
-                variant="span"
-                color="white"
-                sx={{ textDecoration: "underline", cursor: "pointer" }}
-                onClick={Login}
-              >
-                Login
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
-      </Box>
-    </div>
+      </div>
+      <a onClick={signup}>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        SignUp
+        {/* {isLoading?<CircularProgress />:"SignUp"} */}
+      </a>
+    </form>
+    <Box align="center" mt={3}>
+      <Typography variant="span" color="white">
+      Already Have an Account ?
+      </Typography>
+      <Typography
+        variant="span"
+        color="white"
+        sx={{ textDecoration: "underline", cursor: "pointer" }}
+        onClick={Login}
+      >
+       login
+      </Typography>
+    </Box>
+  </div>
   );
 }
 export default SignUp;

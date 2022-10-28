@@ -43,12 +43,12 @@ let LoginUser = (obj) => {
         onValue(reference, (e) => {
           let status = e.exists();
           console.log(e.exists());
-          // if (status) {
-            // resolve(e);
-          // } 
-          // else {
-          //   reject("Data Not Found :(");
-          // }
+          if (status) {
+            resolve(e.val());
+          } 
+          else {
+            reject("Data Not Found :(");
+          }
         });
       })
       .catch((error) => {
